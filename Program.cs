@@ -54,13 +54,13 @@ await SendAsync(new { type = "sha256_task", sessionId, taskId, payload, iteratio
 var response = await ReceiveAsync(TimeSpan.FromMinutes(2));
 total.Stop();
 
-if (response is null || response.Value.RootElement.GetProperty("type").GetString() != "task_result")
+if (response is null || response.RootElement.GetProperty("type").GetString() != "task_result")
 {
     Console.Error.WriteLine("O worker não devolveu um resultado válido.");
     return 6;
 }
 
-var root = response.Value.RootElement;
+var root = response.RootElement;
 var remoteHash = root.GetProperty("hash").GetString() ?? "";
 var workerMs = root.GetProperty("workerMs").GetInt64();
 var local = Stopwatch.StartNew();
@@ -112,4 +112,3 @@ static bool RunAdb(string arguments)
     }
     catch { return false; }
 }
-

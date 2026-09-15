@@ -3,6 +3,7 @@ name: Build APK and Windows Installer
 on:
   workflow_dispatch:
   push:
+    branches: ['main']
     tags: ['v*']
 
 jobs:
@@ -44,4 +45,3 @@ jobs:
         with:
           name: Venbrayk-Process-Windows
           path: artifacts/Venbrayk-Process-Setup-v0.1.0.exe
-
